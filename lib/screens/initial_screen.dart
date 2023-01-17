@@ -20,6 +20,7 @@ class _InitialScreenState extends State<InitialScreen> {
       ),
       body: ListView(
         children: TaskInherited.of(context).taskList,
+        padding: EdgeInsets.only(top: 8, bottom: 70),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -27,7 +28,9 @@ class _InitialScreenState extends State<InitialScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (contextNew) => FormScreen(taskContext: context,),
+                builder: (contextNew) => FormScreen(
+                  taskContext: context,
+                ),
               ),
             );
           });

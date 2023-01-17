@@ -16,6 +16,13 @@ class Task extends StatefulWidget {
 class _TaskState extends State<Task> {
   int nivel = 0;
 
+  bool assetOrNetwork() {
+    if (widget.foto.contains('http')) {
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,7 +31,8 @@ class _TaskState extends State<Task> {
         children: [
           Container(
             decoration: BoxDecoration(
-                color: Colors.deepPurpleAccent, borderRadius: BorderRadius.circular(5)),
+                color: Colors.deepPurpleAccent,
+                borderRadius: BorderRadius.circular(5)),
             height: 140,
           ),
           Column(
@@ -46,10 +54,15 @@ class _TaskState extends State<Task> {
                       height: 100,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
-                        child: Image.asset(
-                          widget.foto,
-                          fit: BoxFit.cover,
-                        ),
+                        child: assetOrNetwork()
+                            ? Image.asset(
+                                widget.foto,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                widget.foto,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                     Column(
@@ -65,7 +78,9 @@ class _TaskState extends State<Task> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                             )),
-                        Difficulty(difficultyLevel: widget.dificuldade,),
+                        Difficulty(
+                          difficultyLevel: widget.dificuldade,
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -111,7 +126,8 @@ class _TaskState extends State<Task> {
                   Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Text('Nivel: $nivel',
-                        style: const TextStyle(color: Colors.white, fontSize: 16)),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 16)),
                   ),
                 ],
               ),
