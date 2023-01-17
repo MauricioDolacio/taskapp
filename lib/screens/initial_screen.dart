@@ -1,4 +1,3 @@
-import 'package:alura_flutter_curso_1/components/task.dart';
 import 'package:alura_flutter_curso_1/data/task_inherited.dart';
 import 'package:alura_flutter_curso_1/screens/form_screen.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +18,8 @@ class _InitialScreenState extends State<InitialScreen> {
         title: const Text('Tarefas'),
       ),
       body: ListView(
+        padding: const EdgeInsets.only(top: 8, bottom: 70),
         children: TaskInherited.of(context).taskList,
-        padding: EdgeInsets.only(top: 8, bottom: 70),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
