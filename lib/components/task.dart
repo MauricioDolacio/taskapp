@@ -1,4 +1,5 @@
 import 'package:alura_flutter_curso_1/components/difficulty.dart';
+import 'package:alura_flutter_curso_1/data/task_dao.dart';
 import 'package:flutter/material.dart';
 
 class Task extends StatefulWidget {
@@ -6,8 +7,7 @@ class Task extends StatefulWidget {
   final String foto;
   final int dificuldade;
 
-  Task(this.nome, this.foto, this.dificuldade, {Key? key})
-      : super(key: key);
+  Task(this.nome, this.foto, this.dificuldade, {Key? key}) : super(key: key);
 
   int nivel = 0;
 
@@ -16,7 +16,6 @@ class Task extends StatefulWidget {
 }
 
 class _TaskState extends State<Task> {
-
   bool assetOrNetwork() {
     if (widget.foto.contains('http')) {
       return false;
@@ -88,6 +87,9 @@ class _TaskState extends State<Task> {
                       height: 58,
                       width: 58,
                       child: ElevatedButton(
+                          onLongPress: () {
+                            TaskDao().delete(widget.nome);
+                          },
                           onPressed: () {
                             setState(() {
                               widget.nivel++;

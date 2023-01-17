@@ -1,4 +1,5 @@
-import 'package:alura_flutter_curso_1/data/task_inherited.dart';
+import 'package:alura_flutter_curso_1/components/task.dart';
+import 'package:alura_flutter_curso_1/data/task_dao.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
@@ -16,22 +17,23 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController imageController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
   bool valueValidator(String? value) {
-    if(value != null && value.isEmpty) {
+    if (value != null && value.isEmpty) {
       return true;
     }
     return false;
   }
+
   bool difficultyValidator(String? value) {
-    if(value != null && value.isEmpty) {
-      if(int.parse(value) > 5 ||
-          int.parse(value) < 1) {
+    if (value != null && value.isEmpty) {
+      if (int.parse(value) > 5 || int.parse(value) < 1) {
         return true;
       }
     }
     return false;
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -98,7 +100,7 @@ class _FormScreenState extends State<FormScreen> {
                         setState(() {});
                       },
                       validator: (value) {
-                        if (valueValidator(value)) {
+                        if (difficultyValidator(value)) {
                           return 'Insira um URL de Imagem!';
                         }
                         return null;
@@ -139,7 +141,11 @@ class _FormScreenState extends State<FormScreen> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        TaskInherited.of(widget.taskContext).newTask(nameController.text, imageController.text, int.parse(difficultyController.text));
+                        TaskDao().save(Task(
+                          nameController.text,
+                          imageController.text,
+                          int.parse(difficultyController.text),
+                        ));
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Criando uma nova tarefa'),
