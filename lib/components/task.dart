@@ -88,7 +88,28 @@ class _TaskState extends State<Task> {
                       width: 58,
                       child: ElevatedButton(
                           onLongPress: () {
-                            TaskDao().delete(widget.nome);
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                      title: const Text('Aviso'),
+                                      content: const Text(
+                                          'Deseja deletar esta tarefa?'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Sim'),
+                                          onPressed: () {
+                                            TaskDao().delete(widget.nome);
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('Não'))
+                                      ]);
+                                });
                           },
                           onPressed: () {
                             setState(() {
