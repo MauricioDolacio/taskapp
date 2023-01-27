@@ -19,17 +19,21 @@ class _FormScreenState extends State<FormScreen> {
   final _formKey = GlobalKey<FormState>();
 
   bool valueValidator(String? value) {
-    if (value != null && value.isEmpty) {
+    if (value == null || value.isEmpty) {
       return true;
     }
     return false;
   }
 
   bool difficultyValidator(String? value) {
-    if (value != null && value.isEmpty) {
-      if (int.parse(value) > 5 || int.parse(value) < 1) {
+    try {
+      if (value == null || value.isEmpty) {
+        return true;
+      } else if (int.parse(value) > 5 || int.parse(value) < 1) {
         return true;
       }
+    } on Exception catch (e) {
+      return true;
     }
     return false;
   }
@@ -50,7 +54,7 @@ class _FormScreenState extends State<FormScreen> {
               decoration: BoxDecoration(
                 color: Colors.black12,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(width: 2),
+                border: Border.all(width: 2, color: Colors.black26),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -61,7 +65,7 @@ class _FormScreenState extends State<FormScreen> {
                     child: TextFormField(
                       validator: (String? value) {
                         if (valueValidator(value)) {
-                          return 'Insira o nome da Tarefa';
+                          return 'Enter task name';
                         }
                         return null;
                       },
@@ -69,7 +73,7 @@ class _FormScreenState extends State<FormScreen> {
                       textAlign: TextAlign.center,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: 'Nome',
+                          hintText: 'Name',
                           fillColor: Colors.white70,
                           filled: true),
                     ),
@@ -79,7 +83,7 @@ class _FormScreenState extends State<FormScreen> {
                     child: TextFormField(
                       validator: (value) {
                         if (difficultyValidator(value)) {
-                          return 'Insira uma dificuldade entre 1 e 5';
+                          return 'Enter a number between 1 and 5';
                         }
                         return null;
                       },
@@ -88,7 +92,7 @@ class _FormScreenState extends State<FormScreen> {
                       textAlign: TextAlign.center,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: 'Dificuldade',
+                          hintText: 'Difficulty',
                           fillColor: Colors.white70,
                           filled: true),
                     ),
@@ -100,8 +104,8 @@ class _FormScreenState extends State<FormScreen> {
                         setState(() {});
                       },
                       validator: (value) {
-                        if (difficultyValidator(value)) {
-                          return 'Insira um URL de Imagem!';
+                        if (valueValidator(value)) {
+                          return 'Enter an image URL';
                         }
                         return null;
                       },
@@ -110,7 +114,7 @@ class _FormScreenState extends State<FormScreen> {
                       textAlign: TextAlign.center,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: 'Imagem',
+                          hintText: 'Image',
                           fillColor: Colors.white70,
                           filled: true),
                     ),
@@ -119,11 +123,11 @@ class _FormScreenState extends State<FormScreen> {
                     height: 100,
                     width: 72,
                     decoration: BoxDecoration(
-                      color: Colors.deepPurpleAccent,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         width: 2,
-                        color: Colors.deepPurple,
+                        color: Colors.black26,
                       ),
                     ),
                     child: ClipRRect(
@@ -132,7 +136,7 @@ class _FormScreenState extends State<FormScreen> {
                         imageController.text,
                         errorBuilder: (BuildContext context, Object exception,
                             StackTrace? stackTrace) {
-                          return Image.asset('assets/images/missing_photo.png');
+                          return Icon(Icons.camera_alt_rounded, size: 40, color: Colors.black54,);
                         },
                         fit: BoxFit.cover,
                       ),
@@ -154,7 +158,7 @@ class _FormScreenState extends State<FormScreen> {
                         Navigator.pop(context);
                       }
                     },
-                    child: const Text('Adicionar'),
+                    child: const Text('Add Task'),
                   )
                 ],
               ),

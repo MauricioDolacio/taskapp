@@ -6,10 +6,9 @@ class Task extends StatefulWidget {
   final String nome;
   final String foto;
   final int dificuldade;
+  int nivel = 0;
 
   Task(this.nome, this.foto, this.dificuldade, {Key? key}) : super(key: key);
-
-  int nivel = 0;
 
   @override
   State<Task> createState() => _TaskState();
@@ -89,33 +88,46 @@ class _TaskState extends State<Task> {
                       child: ElevatedButton(
                           onLongPress: () {
                             showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                      title: const Text('Aviso'),
-                                      content: const Text(
-                                          'Deseja deletar esta tarefa?'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: const Text('Sim'),
-                                          onPressed: () {
-                                            TaskDao().delete(widget.nome);
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text('Não'))
-                                      ]);
-                                });
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Aviso'),
+                                  content: Text(
+                                      'Deseja deletar a tarefa "${widget.nome}?"'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Sim'),
+                                      onPressed: () {
+                                        TaskDao().delete(widget.nome);
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('Não'),
+                                    )
+                                  ],
+                                );
+                              },
+                            );
                           },
                           onPressed: () {
-                            setState(() {
-                              widget.nivel++;
-                            });
-                            // print('$nivel');
+                            if ((widget.dificuldade * 10) <
+                                (widget.nivel + 1)) {
+                              ScaffoldMessenger.of(context)
+                                ..hideCurrentSnackBar()
+                                ..showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Nivel maximo alcançado'),
+                                  ),
+                                );
+                            } else {
+                              setState(() {
+                                widget.nivel++;
+                              });
+                            }
                           },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -149,7 +161,7 @@ class _TaskState extends State<Task> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Text('Nivel: ${widget.nivel}',
+                    child: Text('Level: ${widget.nivel}',
                         style:
                             const TextStyle(color: Colors.white, fontSize: 16)),
                   ),

@@ -1,7 +1,6 @@
 import 'package:alura_flutter_curso_1/data/task_dao.dart';
 import 'package:alura_flutter_curso_1/screens/form_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../components/task.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -24,7 +23,7 @@ class _InitialScreenState extends State<InitialScreen> {
               },
               icon: const Icon(Icons.refresh))
         ],
-        title: const Text('Tarefas'),
+        title: const Text('Tasks'),
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 8, bottom: 70),
@@ -38,7 +37,7 @@ class _InitialScreenState extends State<InitialScreen> {
                     child: Column(
                       children: const [
                         CircularProgressIndicator(),
-                        Text('Carregando')
+                        Text('Loading')
                       ],
                     ),
                   );
@@ -47,7 +46,7 @@ class _InitialScreenState extends State<InitialScreen> {
                     child: Column(
                       children: const [
                         CircularProgressIndicator(),
-                        Text('Carregando')
+                        Text('Loading')
                       ],
                     ),
                   );
@@ -56,7 +55,7 @@ class _InitialScreenState extends State<InitialScreen> {
                     child: Column(
                       children: const [
                         CircularProgressIndicator(),
-                        Text('Carregando')
+                        Text('Loading')
                       ],
                     ),
                   );
@@ -72,17 +71,19 @@ class _InitialScreenState extends State<InitialScreen> {
                     }
                     return Center(
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: const [
-                          Icon(Icons.error_outline, size: 128),
+                          Icon(Icons.error_outline, size: 64, color: Colors.black54,),
                           Text(
-                            'Não há nenhuma tarefa',
-                            style: TextStyle(fontSize: 32),
+                            'There is no task',
+                            style: TextStyle(fontSize: 24, color: Colors.black54),
                           ),
                         ],
                       ),
                     );
                   }
-                  return const Text('Erro ao carregar tarefas');
+                  return const Text('Error loading tasks');
               }
             }),
       ),
