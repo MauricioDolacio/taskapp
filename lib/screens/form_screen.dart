@@ -32,7 +32,7 @@ class _FormScreenState extends State<FormScreen> {
       } else if (int.parse(value) > 5 || int.parse(value) < 1) {
         return true;
       }
-    } on Exception catch (e) {
+    } on Exception {
       return true;
     }
     return false;
@@ -136,7 +136,7 @@ class _FormScreenState extends State<FormScreen> {
                         imageController.text,
                         errorBuilder: (BuildContext context, Object exception,
                             StackTrace? stackTrace) {
-                          return Icon(
+                          return const Icon(
                             Icons.camera_alt_rounded,
                             size: 40,
                             color: Colors.black54,

@@ -9,4 +9,16 @@ ThemeData myTheme = ThemeData(
     secondary: ThemeColors.theme['secondary'],
     surface: ThemeColors.theme['background'],
   ),
+  textTheme: const TextTheme(
+    displaySmall: TextStyle(
+      color: Colors.black,
+      fontSize: 20,
+      overflow: TextOverflow.ellipsis,
+    ),
+  ),
+  primaryTextTheme: const TextTheme(
+    labelLarge: TextStyle(
+      fontSize: 16,
+    ),
+  ),
 );

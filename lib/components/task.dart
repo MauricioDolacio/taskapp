@@ -3,6 +3,7 @@ import 'package:alura_flutter_curso_1/data/task_dao.dart';
 import 'package:alura_flutter_curso_1/themes/themes_colors.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Task extends StatefulWidget {
   final String nome;
   final String foto;
@@ -73,10 +74,7 @@ class _TaskState extends State<Task> {
                             width: 200,
                             child: Text(
                               widget.nome,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                              style: Theme.of(context).textTheme.displaySmall,
                             )),
                         Difficulty(
                           difficultyLevel: widget.dificuldade,
@@ -133,11 +131,13 @@ class _TaskState extends State<Task> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.arrow_drop_up),
+                            children: [
+                              const Icon(Icons.arrow_drop_up),
                               Text(
-                                'Up',
-                                style: TextStyle(fontSize: 14),
+                                'UP',
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .labelMedium,
                               )
                             ],
                           )),
@@ -162,10 +162,11 @@ class _TaskState extends State<Task> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
-                    child: Text('Level: ${widget.nivel}',
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 16)),
-                  ),
+                    child: Text(
+                      'Level: ${widget.nivel}',
+                      style: Theme.of(context).primaryTextTheme.labelLarge,
+                    ),
+                  )
                 ],
               ),
             ],
