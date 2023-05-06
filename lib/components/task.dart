@@ -1,5 +1,6 @@
 import 'package:alura_flutter_curso_1/components/difficulty.dart';
 import 'package:alura_flutter_curso_1/data/task_dao.dart';
+import 'package:alura_flutter_curso_1/themes/themes_colors.dart';
 import 'package:flutter/material.dart';
 
 class Task extends StatefulWidget {
@@ -30,7 +31,7 @@ class _TaskState extends State<Task> {
         children: [
           Container(
             decoration: BoxDecoration(
-                color: Colors.deepPurpleAccent,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(5)),
             height: 140,
           ),
@@ -38,7 +39,7 @@ class _TaskState extends State<Task> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(5)),
                 height: 100,
                 child: Row(
@@ -152,7 +153,7 @@ class _TaskState extends State<Task> {
                     child: SizedBox(
                       width: 200,
                       child: LinearProgressIndicator(
-                        color: Colors.white,
+                        color: ThemeColors.theme['progress'],
                         value: (widget.dificuldade > 0)
                             ? (widget.nivel / widget.dificuldade) / 10
                             : 1,

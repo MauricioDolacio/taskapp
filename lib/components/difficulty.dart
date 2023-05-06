@@ -1,3 +1,4 @@
+import 'package:alura_flutter_curso_1/themes/themes_colors.dart';
 import 'package:flutter/material.dart';
 
 class Difficulty extends StatelessWidget {
@@ -15,27 +16,37 @@ class Difficulty extends StatelessWidget {
         Icon(
           Icons.star,
           size: 15,
-          color: (difficultyLevel >= 1) ? Colors.deepPurple : Colors.deepPurple[100],
+          color: (difficultyLevel >= 1)
+              ? ThemeColors.theme['primary']
+              : ThemeColors.theme['transparent'],
         ),
         Icon(
           Icons.star,
           size: 15,
-          color: (difficultyLevel >= 2) ? Colors.deepPurple : Colors.deepPurple[100],
+          color: (difficultyLevel >= 2)
+              ? ThemeColors.theme['primary']
+              : ThemeColors.theme['transparent'],
         ),
         Icon(
           Icons.star,
           size: 15,
-          color: (difficultyLevel >= 3) ? Colors.deepPurple : Colors.deepPurple[100],
+          color: (difficultyLevel >= 3)
+              ? ThemeColors.theme['primary']
+              : ThemeColors.theme['transparent'],
         ),
         Icon(
           Icons.star,
           size: 15,
-          color: (difficultyLevel >= 4) ? Colors.deepPurple : Colors.deepPurple[100],
+          color: (difficultyLevel >= 4)
+              ? ThemeColors.theme['primary']
+              : ThemeColors.theme['transparent'],
         ),
         Icon(
           Icons.star,
           size: 15,
-          color: (difficultyLevel >= 5) ? Colors.deepPurple : Colors.deepPurple[100],
+          color: (difficultyLevel >= 5)
+              ? ThemeColors.theme['primary']
+              : ThemeColors.theme['transparent'],
         ),
       ],
     );

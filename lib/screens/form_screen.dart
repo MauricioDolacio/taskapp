@@ -136,7 +136,11 @@ class _FormScreenState extends State<FormScreen> {
                         imageController.text,
                         errorBuilder: (BuildContext context, Object exception,
                             StackTrace? stackTrace) {
-                          return Icon(Icons.camera_alt_rounded, size: 40, color: Colors.black54,);
+                          return Icon(
+                            Icons.camera_alt_rounded,
+                            size: 40,
+                            color: Colors.black54,
+                          );
                         },
                         fit: BoxFit.cover,
                       ),

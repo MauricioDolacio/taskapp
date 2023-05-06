@@ -1,6 +1,5 @@
 import 'package:alura_flutter_curso_1/data/database.dart';
 import 'package:sqflite/sqflite.dart';
-
 import '../components/task.dart';
 
 class TaskDao {
